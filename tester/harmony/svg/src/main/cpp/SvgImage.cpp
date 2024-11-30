@@ -20,6 +20,11 @@
 #include <multimedia/image_framework/image/image_source_native.h>
 #include <multimedia/image_framework/image_pixel_map_mdk.h>
 #include <glog/logging.h>
+#include <native_drawing/drawing_image.h>
+#include <native_drawing/drawing_rect.h>
+#include <native_drawing/drawing_pixel_map.h>
+#include <native_drawing/drawing_sampling_options.h>
+#include <rawfile/raw_file.h>
 
 const char * ASSET_PREFIX = "asset://";
 const char * RAWFILE_PREFIX = "assets/";
@@ -125,7 +130,7 @@ void SvgImage::OnDraw(OH_Drawing_Canvas *canvas) {
 
             // Draw picture by type OH_Drawing_PixelMap
             OH_Drawing_CanvasSave(canvas);
-            drawing::Rect clipRect(x, y, width, height);
+            drawing::Rect clipRect(x, y, x + width, y + height);
             OH_Drawing_CanvasClipRect(canvas, clipRect.get(), OH_Drawing_CanvasClipOp::INTERSECT, true);
             OH_Drawing_CanvasDrawPixelMapRect(canvas, ohPixelMap, srcPixelMap.get(), dstPixelMap.get(),
                                               samplingOptions);

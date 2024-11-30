@@ -25,6 +25,9 @@ import { Tester, Filter, TestCase, TestSuite } from '@rnoh/testerino';
 import Issue241 from './issueTests/Issue241';
 import Issue236 from './issueTests/Issue236';
 import Issue244 from './issueTests/Issue244';
+import Issue267 from './issueTests/Issue267';
+import Issue280 from './issueTests/Issue280';
+import Issue308 from './issueTests/Issue308';
 
 class SvgLayoutExample extends Component {
   static title = 'SVG with flex layout';
@@ -391,6 +394,15 @@ export default function () {
         </TestCase>
         <TestCase itShould="Issue #244: Text linear gradient">
           <Issue244 />
+        </TestCase>
+        <TestCase itShould="Issue #267: Pattern width erroneously set equal to height">
+          <Issue267 />
+        </TestCase>
+        <TestCase itShould="Issue #280: The svg image is not displayed when mask and use are used at the same time.">
+          <Issue280 />
+        </TestCase>
+        <TestCase itShould="Issue #308: The TSpan should be displayed with proper alignment.">
+          <Issue308 />
         </TestCase>
       </ScrollView>
     </Tester>

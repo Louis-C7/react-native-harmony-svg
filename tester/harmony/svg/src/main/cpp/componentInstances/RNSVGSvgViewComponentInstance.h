@@ -4,6 +4,7 @@
 #include <folly/dynamic.h>
 #include "SvgArkUINode.h"
 #include "SvgShadowNodes.h"
+#include "SvgViewManager.h"
 
 namespace rnoh {
 namespace svg {
@@ -15,15 +16,18 @@ private:
 
 public:
     RNSVGSvgViewComponentInstance(Context context);
+    ~RNSVGSvgViewComponentInstance();
 
     // get SvgNode from childComponentInstance and set it to root_
     void onChildInserted(ComponentInstance::Shared const &childComponentInstance, std::size_t index) override {
         OnChildInsertCommon(std::dynamic_pointer_cast<SvgHost>(childComponentInstance));
+        getLocalRootArkUINode().markDirty();
     }
 
     // TODO get SvgNode and delete it from svg tree
     void onChildRemoved(ComponentInstance::Shared const &childComponentInstance) override {
         OnChildRemoveCommon(std::dynamic_pointer_cast<SvgHost>(childComponentInstance));
+        getLocalRootArkUINode().markDirty();
     }
 
     SvgArkUINode &getLocalRootArkUINode() override;

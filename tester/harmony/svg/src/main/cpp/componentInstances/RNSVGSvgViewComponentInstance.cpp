@@ -9,6 +9,11 @@ RNSVGSvgViewComponentInstance::RNSVGSvgViewComponentInstance(Context context)
     SetSvgNode(std::make_shared<SvgSvg>());
     getLocalRootArkUINode().SetSvgNode(GetSvgNode());
     GetSvgNode()->SetContext(std::make_shared<SvgContext>());
+    SvgViewManager::getInstance().setSvgView(CppComponentInstance::getTag(), dynamic_pointer_cast<SvgSvg>(GetSvgNode()));
+}
+
+RNSVGSvgViewComponentInstance::~RNSVGSvgViewComponentInstance() {
+    SvgViewManager::getInstance().onDropView(CppComponentInstance::getTag());
 }
 
 void RNSVGSvgViewComponentInstance::onPropsChanged(SharedConcreteProps const &props) {
